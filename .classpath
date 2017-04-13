@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_60">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry exported="true" kind="lib" path="D:/Program Files (x86)/Apache Software Foundation/Tomcat 9.0/lib/el-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Program Files (x86)/Apache Software Foundation/Tomcat 9.0/lib/jasper.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Program Files (x86)/Apache Software Foundation/Tomcat 9.0/lib/jasper-el.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Program Files (x86)/Apache Software Foundation/Tomcat 9.0/lib/jaspic-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Program Files (x86)/Apache Software Foundation/Tomcat 9.0/lib/jsp-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Program Files (x86)/Apache Software Foundation/Tomcat 9.0/lib/servlet-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Program Files (x86)/Apache Software Foundation/Tomcat 9.0/lib/tomcat-jdbc.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Program Files (x86)/Apache Software Foundation/Tomcat 9.0/lib/tomcat-util.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/commons-validator-1.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/javax.mail-1.5.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/jstl-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/mysql-connector-java-5.1.41-bin.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-lang3-3.5.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

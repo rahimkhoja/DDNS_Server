@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <servlet>
+    <servlet-name>login</servlet-name>
+    <servlet-class>com.khoja.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>create</servlet-name>
+    <servlet-class>com.khoja.servlet.CreateServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>dynlet</servlet-name>
+    <servlet-class>com.khoja.servlet.DynServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>adminlet</servlet-name>
+    <servlet-class>com.khoja.servlet.AdminServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>vallet</servlet-name>
+    <servlet-class>com.khoja.servlet.ValidateServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>updatelet</servlet-name>
+    <servlet-class>com.khoja.servlet.UpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>login</servlet-name>
+    <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>create</servlet-name>
+    <url-pattern>/CreateServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dynlet</servlet-name>
+    <url-pattern>/app/DynServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>adminlet</servlet-name>
+    <url-pattern>/app/admin/AdminServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>vallet</servlet-name>
+    <url-pattern>/validator.html</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>updatelet</servlet-name>
+    <url-pattern>/update.html</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <filter>
+    <filter-name>loginFilter</filter-name>
+    <filter-class>com.khoja.filters.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>loginFilter</filter-name>
+    <url-pattern>/app/*</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>AlreadyLoggedFilter</filter-name>
+    <filter-class>com.khoja.filters.AlreadyLoggedFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AlreadyLoggedFilter</filter-name>
+    <url-pattern>/index.jsp</url-pattern>
+    <url-pattern>/login.jsp</url-pattern>
+    <url-pattern>/create.jsp</url-pattern>
+    <url-pattern>/forgot.jsp</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>AdminFilter</filter-name>
+    <filter-class>com.khoja.filters.AdminFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AdminFilter</filter-name>
+    <url-pattern>/app/admin/*</url-pattern>
+  </filter-mapping>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>secureupdate</web-resource-name>
+      <url-pattern>/update.html</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>dynusers</role-name>
+    </auth-constraint>
+    <user-data-constraint>
+      <transport-guarantee>NONE</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+  <login-config>
+    <auth-method>BASIC</auth-method>
+  </login-config>
+  <context-param>
+      <param-name>dbHost</param-name>
+      <param-value>172.16.254.40</param-value>
+</context-param>
+  <context-param>
+      <param-name>dbPort</param-name>
+      <param-value>3306</param-value>
+</context-param>
+  <context-param>
+      <param-name>dbName</param-name>
+      <param-value>dyn_server_db</param-value>
+</context-param>
+  <context-param>
+      <param-name>dbUser</param-name>
+      <param-value>dyn_web_app</param-value>
+</context-param>
+  <context-param>
+      <param-name>dbPassword</param-name>
+      <param-value>Parad0x666!</param-value>
+</context-param>
+  <context-param>
+      <param-name>mailServer</param-name>
+      <param-value>smtp.office365.com</param-value>
+</context-param>
+  <context-param>
+      <param-name>mailPort</param-name>
+      <param-value>587</param-value>
+</context-param>
+  <context-param>
+      <param-name>mailUser</param-name>
+      <param-value>rahimk@khojacorp.com</param-value>
+</context-param>
+  <context-param>
+      <param-name>mailPass</param-name>
+      <param-value>Parad0x666!</param-value>
+</context-param>
+  <context-param>
+      <param-name>mailAddress</param-name>
+      <param-value>no-reply@hiive.biz</param-value>
+</context-param>
+</web-app>
