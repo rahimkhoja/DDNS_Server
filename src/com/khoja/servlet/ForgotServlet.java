@@ -91,7 +91,7 @@ public class ForgotServlet extends HttpServlet {
         String URIemail = "&email="+ForgotDao.getEmail(userID, dbProperties);
         return scheme + serverName + serverPort + contextPath + "/validator.html?" + URItype + URIemail + URI1 + URI2;
     }
-    
+   
 	
     public static boolean checkUser(String username) {
     	
@@ -104,15 +104,12 @@ public class ForgotServlet extends HttpServlet {
         	      && letter.matcher(username).find()
         	      && all.matcher(username).find();
     }
-
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		DB dbProperties = new DB(getServletContext().getInitParameter("dbHost"), getServletContext().getInitParameter("dbPort"), getServletContext().getInitParameter("dbName"), getServletContext().getInitParameter("dbUser"), getServletContext().getInitParameter("dbPassword"));

@@ -73,12 +73,11 @@ public class CreateServlet extends HttpServlet{
             System.out.println("Error - Create Account E-mail Send FAILED");
             throw new RuntimeException(e);
         }
- 
-    	
     }
     
     public static String getValidatorURL(HttpServletRequest request, String email, String key1, String key2) {
-        String scheme = request.getScheme() + "://";
+    
+    	String scheme = request.getScheme() + "://";
         String serverName = request.getServerName();
         String serverPort = (request.getServerPort() == 80) ? "" : ":" + request.getServerPort();
         String contextPath = request.getContextPath();
@@ -88,7 +87,7 @@ public class CreateServlet extends HttpServlet{
         String URI2 = "&key2="+key2;
         String URIemail = "&email="+email;
         return scheme + serverName + serverPort + contextPath + "/validator.html?" + URItype + URIemail + URI1 + URI2;
-      }
+    }
     
     public static boolean checkPassword(String password) {
     	
@@ -121,8 +120,7 @@ public class CreateServlet extends HttpServlet{
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
-    	
-	}
+    }
     
     public void doPost(HttpServletRequest request, HttpServletResponse response)  
             throws ServletException, IOException {  
@@ -146,59 +144,40 @@ public class CreateServlet extends HttpServlet{
         						if (term_accept) {
         							String keygen1 = KeyGenerator.GenerateKey(); 
         							String keygen2 = KeyGenerator.GenerateKey(); 
-        						
         							if (CreateDao.addUser(newUserName, newUserEmail,Hashing.returnMD5(newUserPass1), keygen1, keygen2, dbProperties)) {
-        						
-	        							String validatorURL =  getValidatorURL(request, newUserEmail, keygen1, keygen2);
+        								String validatorURL =  getValidatorURL(request, newUserEmail, keygen1, keygen2);
 	        							System.out.println(validatorURL);
 	        							sendMail(newUserEmail, validatorURL, newUserName,getServletContext().getInitParameter("mailUser"),getServletContext().getInitParameter("mailPass"),getServletContext().getInitParameter("mailServer"),getServletContext().getInitParameter("mailPort"),getServletContext().getInitParameter("mailAddress"));
 	        							request.removeAttribute("newUserEmail");
 	        							request.removeAttribute("username");
-	        							
-        							}
+	        						}
         							request.setAttribute("create_error", "<p style=\"color:green\">New account created. Check email for activation link.</p>");
-        			        		RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/create.jsp");
-        			        		rd.forward(request, response);
-        						} else {
+        			        	} else {
             						request.setAttribute("create_error", "<p style=\"color:red\">Terms & Conditions not accepted.</p>");
-            			        	RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/create.jsp");
-            			        	rd.forward(request, response);
-            					}
-        						
-        			        	
+            			    	}
         					} else {
         						request.setAttribute("create_error", "<p style=\"color:red\">Passwords do not match</p>");
-        			        	RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/create.jsp");
-        			        	rd.forward(request, response);
-        					}
+        			        }
         				} else {
         					request.setAttribute("create_error", "<p style=\"color:red\">Password must be 8 or more characters long with at least 1 letter, 1 number, and 1 special character (!#$%&*()_+=<>?{}~-).</p>");
-    			        	RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/create.jsp");
-    			        	rd.forward(request, response);
         				}
         			} else {
         				request.setAttribute("create_error", "<p style=\"color:red\">User Name must be 5 or more characters long and only alphanumeric characters.</p>");
-			        	RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/create.jsp");
-			        	rd.forward(request, response);
         			}
         		} else {
         			request.setAttribute("create_error", "<p style=\"color:red\">User Name already in use.</p>");
-		        	RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/create.jsp");
-		        	rd.forward(request, response);
         		}
         	} else {
     			request.setAttribute("create_error", "<p style=\"color:red\">Email already in use.</p>");
-	        	RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/create.jsp");
-	        	rd.forward(request, response);
     		}
+        	RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/create.jsp");
+        	rd.forward(request, response);
         } else {
         	request.setAttribute("create_error", "<p style=\"color:red\">Invalid email address.</p>");
         	RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/create.jsp");
         	rd.forward(request, response);
         }
   
-        
         doGet(request, response);
-         
     }  
 } 

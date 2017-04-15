@@ -128,56 +128,56 @@ function isProcess()
   	</table>
     </fieldset>
 </form><BR>
-<c:out escapeXml="false" value="${setting_error}"/>
+<c:out escapeXml="false" value="${property_error}"/>
 <form action="${pageContext.request.contextPath}/app/admin/admin.jsp" method="post">
 	<fieldset>
 	<legend> System Properties </legend>
     <table>
  	<tr>
  		<td>NS1 IP Address</td>
- 		<td><input type="text" name="ns1" required="required" /></td>
- 		<td><button name="ns1set" type="submit" value="yes">Set Name Server 1</button></td>
+ 		<td><input type="text" name="ns1" required="required" value="<c:out value="${systemProperties.ns1}" />" /></td>
+ 		<td><button name="ns1set" type="submit" value="yes" onclick="return isProcess();">Set Name Server 1</button></td>
  	</tr>
  	<tr>
  		<td>NS2 IP Address</td>
- 		<td><input type="text" name="ns2" required="required" /></td>
- 		<td><button name="ns2set" type="submit" value="yes">Set Name Server 2</button></td>
+ 		<td><input type="text" name="ns2" required="required" value="<c:out value="${systemProperties.ns2}" />" /></td>
+ 		<td><button name="ns2set" type="submit" value="yes" onclick="return isProcess();">Set Name Server 2</button></td>
  	</tr>
  	<tr>
  		<td>New Host IP Address</td>
- 		<td><input type="text" name="root_domain_address" required="required" /></td>
- 		<td><button name="rootset" type="submit" value="yes">Set New Host Address</button></td>
+ 		<td><input type="text" name="root_domain_address" required="required" value="<c:out value="${systemProperties.root}" />" /></td>
+ 		<td><button name="rootset" type="submit" value="yes" onclick="return isProcess();">Set New Host Address</button></td>
  	</tr>
  	<tr>
  		<td>Responsible Person (eg person@domain.com )</td>
- 		<td><input type="text" name="person" required="required" /></td>
- 		<td><button name="personset" type="submit" value="yes">Set Person</button></td>
+ 		<td><input type="text" name="person" required="required" value="<c:out value="${systemProperties.person}" />" /></td>
+ 		<td><button name="personset" type="submit" value="yes" onclick="return isProcess();">Set Person</button></td>
  	</tr>
  	<tr>
  		<td>Serial Number</td>
- 		<td><input type="text" name="serial" required="required" /></td>
- 		<td><button name="serialset" type="submit" value="yes">Set Serial Number</button></td>
+ 		<td><input type="text" name="serial" required="required" value="<c:out value="${systemProperties.serial}" />" /></td>
+ 		<td><button name="serialset" type="submit" value="yes" onclick="return isProcess();">Set Serial Number</button></td>
  	</tr>
  	<tr>
  		<td>TTL</td>
- 		<td><input type="text" name="ttl" required="required" /></td>
- 		<td><button name="ttlset" type="submit" value="yes">Set TTL</button></td>
+ 		<td><input type="text" name="ttl" required="required" value="<c:out value="${systemProperties.ttl}" />" /></td>
+ 		<td><button name="ttlset" type="submit" value="yes" onclick="return isProcess();">Set TTL</button></td>
  	</tr>
  		<td>Refresh</td>
- 		<td><input type="text" name="refresh" required="required" /></td>
- 		<td><button name="refreshset" type="submit" value="yes">Set Refresh</button></td>
+ 		<td><input type="text" name="refresh" required="required" value="<c:out value="${systemProperties.refresh}" />" /></td>
+ 		<td><button name="refreshset" type="submit" value="yes" onclick="return isProcess();">Set Refresh</button></td>
  	</tr>
  		<td>Expire</td>
- 		<td><input type="text" name="expire" required="required" /></td>
- 		<td><button name="expireset" type="submit" value="yes">Set Expire</button></td>
+ 		<td><input type="text" name="expire" required="required" value="<c:out value="${systemProperties.expire}" />" /></td>
+ 		<td><button name="expireset" type="submit" value="yes" onclick="return isProcess();">Set Expire</button></td>
  	</tr>
  		<td>Minimum</td>
- 		<td><input type="text" name="minimum" required="required" /></td>
- 		<td><button name="minset" type="submit" value="yes">Set Minimum</button></td>
+ 		<td><input type="text" name="minimum" required="required" value="<c:out value="${systemProperties.minimum}" />" /></td>
+ 		<td><button name="minset" type="submit" value="yes" onclick="return isProcess();">Set Minimum</button></td>
  	</tr>
  		<td>Retry</td>
- 		<td><input type="text" name="retry" required="required" /></td>
- 		<td><button name="retryset" type="submit" value="yes">Set Retry</button></td>
+ 		<td><input type="text" name="retry" required="required" value="<c:out value="${systemProperties.retry}" />" /></td>
+ 		<td><button name="retryset" type="submit" value="yes" onclick="return isProcess();">Set Retry</button></td>
  	</tr>
   	</table>
     </fieldset>

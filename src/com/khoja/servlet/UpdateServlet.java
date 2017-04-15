@@ -90,8 +90,6 @@ public class UpdateServlet extends HttpServlet {
 			} else {
 				out.println("badaddress");
 			}
-			
-			
 		} else {
 			out.println("badauth");
 		}

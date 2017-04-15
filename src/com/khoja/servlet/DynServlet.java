@@ -169,19 +169,15 @@ public static boolean checkPassword(String password) {
 			if (isValidInetAddress(hostIP)) {
 				if ( DynDao.updateHost(Integer.parseInt(setHost), hostIP, current_user.getID(), dbProperties) && DynDao.updateDNSHost(Integer.parseInt(setHost), hostIP, current_user.getID(), dbProperties)) {
 					request.setAttribute("hosts_error", "<p style=\"color:green\"> Hostname IP updated ("+hostIP+").</p>");
-		        	RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/app/dashboard.jsp");
-		        	rd.forward(request, response);
 		        	System.out.println("Host IP Address Updated - User: "+current_user.getUsername()+" - IP Address: "+hostIP);
 				} else {
 					request.setAttribute("hosts_error", "<p style=\"color:red\">Error updating IP.</p>");
-		        	RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/app/dashboard.jsp");
-		        	rd.forward(request, response);
 				}
 			} else {
 				request.setAttribute("hosts_error", "<p style=\"color:red\">Invalid IP address.</p>");
-	        	RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/app/dashboard.jsp");
-	        	rd.forward(request, response);
 			}
+			RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/app/dashboard.jsp");
+        	rd.forward(request, response);
 		}
 		
 		
@@ -191,19 +187,15 @@ public static boolean checkPassword(String password) {
 					DynDao.addHost(addHostname, Integer.parseInt(addDomain.trim()), current_user.getID(), dbProperties);
 					DNSDao.addHostname(addHostname, Integer.parseInt(addDomain.trim()), current_user.getID(), dbProperties);
 					request.setAttribute("host_error", "<p style=\"color:green\">New hostname added ("+addHostname+").</p>");
-		        	RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/app/dashboard.jsp");
-		        	rd.forward(request, response);
 		        	System.out.println("New Host Added - Hostname: "+addHostname+" User: "+current_user.getUsername());
 				} else {
 					request.setAttribute("host_error", "<p style=\"color:red\">Hostname already exists.</p>");
-		        	RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/app/dashboard.jsp");
-		        	rd.forward(request, response);
 				}
 			} else {
 				request.setAttribute("host_error", "<p style=\"color:red\">Hostnames must be between 5 and 32 characters long, containing only letters, numbers, and hyphens(-). Hostnames cannot start or end with a hyphen(-).</p>");
-	        	RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/app/dashboard.jsp");
-	        	rd.forward(request, response);
-			}
+	      	}
+        	RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/app/dashboard.jsp");
+        	rd.forward(request, response);
 		}
 		
 		if (deleteHost != null) {

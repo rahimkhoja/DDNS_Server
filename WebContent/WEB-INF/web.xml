@@ -113,7 +113,7 @@
 </context-param>
   <context-param>
       <param-name>dbPassword</param-name>
-      <param-value>Parad0x666!</param-value>
+      <param-value>password</param-value>
 </context-param>
   <context-param>
       <param-name>mailServer</param-name>
@@ -129,7 +129,7 @@
 </context-param>
   <context-param>
       <param-name>mailPass</param-name>
-      <param-value>Parad0x666!</param-value>
+      <param-value>password</param-value>
 </context-param>
   <context-param>
       <param-name>mailAddress</param-name>

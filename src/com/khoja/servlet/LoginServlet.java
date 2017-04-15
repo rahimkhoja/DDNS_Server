@@ -30,16 +30,14 @@ public class LoginServlet extends HttpServlet{
         DB dbProperties = new DB(getServletContext().getInitParameter("dbHost"), getServletContext().getInitParameter("dbPort"), getServletContext().getInitParameter("dbName"), getServletContext().getInitParameter("dbUser"), getServletContext().getInitParameter("dbPassword"));
         
         if(LoginDao.validate(n, p, request, dbProperties) != null){ 
-            session.setAttribute("LoggedUser", LoginDao.validate(n, p, request, dbProperties));
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(request.getContextPath() + "/app/dashboard.jsp");
-            dispatcher.forward(request, response);
-            
+            session.setAttribute("LoggedUser", LoginDao.validate(n, p, request, dbProperties));            
         } else{  
         	request.setAttribute("login_error", "<p style=\"color:red\">Sorry user name or password error</p>");
-        	RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/login.jsp");
-        	rd.forward(request, response);
         }  
-        
+
+    	RequestDispatcher rd = getServletContext().getRequestDispatcher(request.getContextPath() + "/login.jsp");
+    	rd.forward(request, response);
+    	
         doGet(request, response);
     }  
 } 

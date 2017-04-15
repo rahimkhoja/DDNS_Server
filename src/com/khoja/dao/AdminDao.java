@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import com.khoja.classes.DynHost;
+import com.khoja.classes.DynProperties;
 import com.khoja.classes.DynUser;
 import com.khoja.classes.DB;
 import com.khoja.classes.DynDomain;
@@ -178,6 +179,67 @@ public class AdminDao {
         return domainlist;
 	}
 	
+	
+	public static DynProperties getProperties(DB dbinfo) {
+		
+		DynProperties set = null; 
+        Connection conn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            Class.forName(dbinfo.getDriver()).newInstance();
+            conn = DriverManager
+                    .getConnection(dbinfo.getDBURL() + dbinfo.getDBName(), dbinfo.getUsername(), dbinfo.getPassword());
+
+            pst = conn
+                    .prepareStatement("SELECT dyn_properties.ttl, dyn_properties.refresh, dyn_properties.expire, dyn_properties.retry, dyn_properties.minimum, "
+                    		+ "dyn_properties.serial, dyn_properties.resp_person, dyn_properties.primary_ns, dyn_properties.secondary_ns, dyn_properties.root_domain_ip FROM dyn_server_db.dyn_properties LIMIT 1;");
+            
+            rs = pst.executeQuery();
+            
+            if (rs.next()) { 
+            	
+            	int ttl = rs.getInt("ttl");
+            	int refresh = rs.getInt("refresh");
+            	int expire = rs.getInt("expire");
+            	int retry = rs.getInt("retry");
+            	int min = rs.getInt("minimum");
+            	String serial = rs.getString("serial");
+            	String ns1 = rs.getString("primary_ns");
+            	String ns2 = rs.getString("secondary_ns");
+            	String root = rs.getString("root_domain_ip");
+            	String person = rs.getString("resp_person");
+            	set = new DynProperties(ns1, ns2, root, person, serial, ttl, refresh, expire, min, retry);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return set;
+	}
 	
 	public static boolean addDomain(String domainname, DB dbinfo) {
 		boolean result = false;
@@ -722,5 +784,493 @@ public class AdminDao {
 
         return result;
     }
+
+	public static boolean setNS1(String ns1, DB dbinfo) {
+		boolean result = false;
+	    Connection conn = null;
+	    PreparedStatement pst = null;
+	    int recordUpdated = 0;
+	            
+	    try {
+			Class.forName(dbinfo.getDriver()).newInstance();
+			conn = DriverManager
+	            .getConnection(dbinfo.getDBURL() + dbinfo.getDBName(), dbinfo.getUsername(), dbinfo.getPassword());
+
+	        pst = conn
+	                .prepareStatement("UPDATE dyn_server_db.dyn_properties SET primary_ns=?;");
+		        pst.setString(1, ns1);		        
+	        
+	        recordUpdated = pst.executeUpdate();
+	        
+	        if (recordUpdated > 0) {            
+	        	result = true;
+	        } 
+	        
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (pst != null) {
+	            try {
+	                pst.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	       
+	    }
+	    return result;
+	}
 	
+
+	public static boolean setNS2(String ns2, DB dbinfo) {
+		boolean result = false;
+	    Connection conn = null;
+	    PreparedStatement pst = null;
+	    int recordUpdated = 0;
+	            
+	    try {
+			Class.forName(dbinfo.getDriver()).newInstance();
+			conn = DriverManager
+	            .getConnection(dbinfo.getDBURL() + dbinfo.getDBName(), dbinfo.getUsername(), dbinfo.getPassword());
+
+	        pst = conn
+	                .prepareStatement("UPDATE dyn_server_db.dyn_properties SET secondary_ns=?;");
+		        pst.setString(1, ns2);		        
+	        
+	        recordUpdated = pst.executeUpdate();
+	        
+	        if (recordUpdated > 0) {            
+	        	result = true;
+	        } 
+	        
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (pst != null) {
+	            try {
+	                pst.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	       
+	    }
+	    return result;
+	}
+
+	public static boolean setRoot(String root, DB dbinfo) {
+		boolean result = false;
+	    Connection conn = null;
+	    PreparedStatement pst = null;
+	    int recordUpdated = 0;
+	            
+	    try {
+			Class.forName(dbinfo.getDriver()).newInstance();
+			conn = DriverManager
+	            .getConnection(dbinfo.getDBURL() + dbinfo.getDBName(), dbinfo.getUsername(), dbinfo.getPassword());
+
+	        pst = conn
+	                .prepareStatement("UPDATE dyn_server_db.dyn_properties SET root_domain_ip=?;");
+		        pst.setString(1, root);		        
+	        
+	        recordUpdated = pst.executeUpdate();
+	        
+	        if (recordUpdated > 0) {            
+	        	result = true;
+	        } 
+	        
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (pst != null) {
+	            try {
+	                pst.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	       
+	    }
+	    return result;
+	}
+
+	public static boolean setRetry(int retry, DB dbinfo) {
+		boolean result = false;
+	    Connection conn = null;
+	    PreparedStatement pst = null;
+	    int recordUpdated = 0;
+	            
+	    try {
+			Class.forName(dbinfo.getDriver()).newInstance();
+			conn = DriverManager
+	            .getConnection(dbinfo.getDBURL() + dbinfo.getDBName(), dbinfo.getUsername(), dbinfo.getPassword());
+
+	        pst = conn
+	                .prepareStatement("UPDATE dyn_server_db.dyn_properties SET retry=?;");
+		        pst.setInt(1, retry);		        
+	        
+	        recordUpdated = pst.executeUpdate();
+	        
+	        if (recordUpdated > 0) {            
+	        	result = true;
+	        } 
+	        
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (pst != null) {
+	            try {
+	                pst.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	       
+	    }
+	    return result;
+	}
+
+	public static boolean setExpire(int expire, DB dbinfo) {
+		boolean result = false;
+	    Connection conn = null;
+	    PreparedStatement pst = null;
+	    int recordUpdated = 0;
+	            
+	    try {
+			Class.forName(dbinfo.getDriver()).newInstance();
+			conn = DriverManager
+	            .getConnection(dbinfo.getDBURL() + dbinfo.getDBName(), dbinfo.getUsername(), dbinfo.getPassword());
+
+	        pst = conn
+	                .prepareStatement("UPDATE dyn_server_db.dyn_properties SET expire=?;");
+		        pst.setInt(1, expire);		        
+	        
+	        recordUpdated = pst.executeUpdate();
+	        
+	        if (recordUpdated > 0) {            
+	        	result = true;
+	        } 
+	        
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (pst != null) {
+	            try {
+	                pst.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	       
+	    }
+	    return result;
+	}
+
+	public static boolean setRefresh(int refresh, DB dbinfo) {
+		boolean result = false;
+	    Connection conn = null;
+	    PreparedStatement pst = null;
+	    int recordUpdated = 0;
+	            
+	    try {
+			Class.forName(dbinfo.getDriver()).newInstance();
+			conn = DriverManager
+	            .getConnection(dbinfo.getDBURL() + dbinfo.getDBName(), dbinfo.getUsername(), dbinfo.getPassword());
+
+	        pst = conn
+	                .prepareStatement("UPDATE dyn_server_db.dyn_properties SET refresh=?;");
+		        pst.setInt(1, refresh);		        
+	        
+	        recordUpdated = pst.executeUpdate();
+	        
+	        if (recordUpdated > 0) {            
+	        	result = true;
+	        } 
+	        
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (pst != null) {
+	            try {
+	                pst.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	       
+	    }
+	    return result;
+	}
+	
+	public static boolean setMinimum(int min, DB dbinfo) {
+		boolean result = false;
+	    Connection conn = null;
+	    PreparedStatement pst = null;
+	    int recordUpdated = 0;
+	            
+	    try {
+			Class.forName(dbinfo.getDriver()).newInstance();
+			conn = DriverManager
+	            .getConnection(dbinfo.getDBURL() + dbinfo.getDBName(), dbinfo.getUsername(), dbinfo.getPassword());
+
+	        pst = conn
+	                .prepareStatement("UPDATE dyn_server_db.dyn_properties SET minimum=?;");
+		        pst.setInt(1, min);		        
+	        
+	        recordUpdated = pst.executeUpdate();
+	        
+	        if (recordUpdated > 0) {            
+	        	result = true;
+	        } 
+	        
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (pst != null) {
+	            try {
+	                pst.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	       
+	    }
+	    return result;
+	}
+
+	public static boolean setSerial(String serial, DB dbinfo) {
+		boolean result = false;
+	    Connection conn = null;
+	    PreparedStatement pst = null;
+	    int recordUpdated = 0;
+	            
+	    try {
+			Class.forName(dbinfo.getDriver()).newInstance();
+			conn = DriverManager
+	            .getConnection(dbinfo.getDBURL() + dbinfo.getDBName(), dbinfo.getUsername(), dbinfo.getPassword());
+
+	        pst = conn
+	                .prepareStatement("UPDATE dyn_server_db.dyn_properties SET serial=?;");
+		        pst.setString(1, serial);		        
+	        
+	        recordUpdated = pst.executeUpdate();
+	        
+	        if (recordUpdated > 0) {            
+	        	result = true;
+	        } 
+	        
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (pst != null) {
+	            try {
+	                pst.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	       
+	    }
+	    return result;
+	}
+
+	public static boolean deleteZoneUser(String username, DB dbinfo) {
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+            
+		try {
+			Class.forName(dbinfo.getDriver()).newInstance();
+			conn = DriverManager
+                .getConnection(dbinfo.getDBURL() + dbinfo.getDBName(), dbinfo.getUsername(), dbinfo.getPassword());
+
+			pst = conn
+                .prepareStatement("DELETE FROM dyn_user_roles WHERE user=?;");
+			pst.setString (1, username);
+
+			int success = pst.executeUpdate();
+        
+			if (success > 0) {   
+				System.out.println("User Deleted User Role - User Name: "+username);
+				result = true;
+			} 
+        
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return result;
+	}
+	
+	
+	public static boolean setPerson(String person, DB dbinfo) {
+		boolean result = false;
+	    Connection conn = null;
+	    PreparedStatement pst = null;
+	    int recordUpdated = 0;
+	            
+	    try {
+			Class.forName(dbinfo.getDriver()).newInstance();
+			conn = DriverManager
+	            .getConnection(dbinfo.getDBURL() + dbinfo.getDBName(), dbinfo.getUsername(), dbinfo.getPassword());
+
+	        pst = conn
+	                .prepareStatement("UPDATE dyn_server_db.dyn_properties SET resp_person=?;");
+		        pst.setString(1, person);		        
+	        
+	        recordUpdated = pst.executeUpdate();
+	        
+	        if (recordUpdated > 0) {            
+	        	result = true;
+	        } 
+	        
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (pst != null) {
+	            try {
+	                pst.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	       
+	    }
+	    return result;
+	}
+
+	public static String getUserName(int userid, DB dbinfo) {
+			String username = null; 
+	        Connection conn = null;
+	        PreparedStatement pst = null;
+	        ResultSet rs = null;
+
+	        try {
+	            Class.forName(dbinfo.getDriver()).newInstance();
+	            conn = DriverManager
+	                    .getConnection(dbinfo.getDBURL() + dbinfo.getDBName(), dbinfo.getUsername(), dbinfo.getPassword());
+
+	            pst = conn.prepareStatement("SELECT dyn_users.user FROM dyn_server_db.dyn_users WHERE dyn_users.id=?;");
+	            pst.setInt(1, userid);
+	            
+	            rs = pst.executeQuery();
+	            
+	            if (rs.next()) {
+	            	username = rs.getString("user");
+		        }
+
+	        } catch (Exception e) {
+	            System.out.println(e);
+	        } finally {
+	            if (conn != null) {
+	                try {
+	                    conn.close();
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	            if (pst != null) {
+	                try {
+	                    pst.close();
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	            if (rs != null) {
+	                try {
+	                    rs.close();
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	        }
+
+	        return username;
+		}
 }
