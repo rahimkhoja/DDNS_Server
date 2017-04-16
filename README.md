@@ -1,2 +1,2 @@
-# DDNS_Server
+# Dynamic DNS Server
 A Dynamic DNS Server Solution 
