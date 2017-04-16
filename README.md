@@ -21,9 +21,34 @@ An open source dynamic dns server solution. Known to work with DDNS clients incl
 * [JSON-RPC Commands from CLI](#json-rpc-commands-from-cli)
 * [Monitoring Your Pool](#monitoring-your-pool)
 * [Donations](#donations)
-* [Credits](#credits)
 * [License](#license)
 
+
+
+#### Basic features
+
+* Am update API based on the Dyndns2 protocal
+  * Makes this compatible with most DDNS clients
+* Fully functional web application for managment of hosts and user profile information.
+* Multiple DNS Server setup for redundancy.
+* Payment processing
+  * Splintered transactions to deal with max transaction size
+  * Minimum payment threshold before balance will be paid out
+  * Minimum denomination for truncating payment amount precision to reduce size/complexity of block transactions
+* Detailed logging
+* Ability to configure multiple ports - each with their own difficulty
+* Variable difficulty / share limiter
+* Share trust algorithm to reduce share validation hashing CPU load
+* Clustering for vertical scaling
+* Modular components for horizontal scaling (pool server, database, stats/API, payment processing, front-end)
+* Live stats API (using AJAX long polling with CORS)
+  * Currency network/block difficulty
+  * Current block height
+  * Network hashrate
+  * Pool hashrate
+  * Each miners' individual stats (hashrate, shares submitted, pending balance, total paid, etc)
+  * Blocks found (pending, confirmed, and orphaned)
+* An easily extendable, responsive, light-weight front-end using API to display data
 
 
 Donations
