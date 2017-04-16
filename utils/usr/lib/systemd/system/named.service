@@ -1,0 +1,12 @@
+[Unit]
+Description=Berkeley Internet Name Domain (DNS) with DLZ
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=60
+ExecStart=/usr/sbin/named -u named -c /etc/named.conf -f -d 9
+
+[Install]
+WantedBy=multi-user.target
