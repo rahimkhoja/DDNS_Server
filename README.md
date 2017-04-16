@@ -24,3 +24,20 @@ An open source dynamic dns server solution. Known to work with DDNS clients incl
 * [Credits](#credits)
 * [License](#license)
 
+
+
+Donations
+---------
+
+Many Bothans died getting this software to you. Honor them by sending me some BTC or XMR.
+
+ * BTC: 1K4N5msYZHse6Hbxz4oWUjwqPf8wu6ducV
+ * XMR: 42VxjBpfi4TS6KFjNrrKo3QLcyK7gBGfM9w7DxmGRcocYnEbJ1hhZWXfaHJtCXBxnL74DpkioPSivjRYU8qkt59s3EaHUU3
+
+
+License
+-------
+
+Released under the GNU General Public License v2
+
+ * http://www.gnu.org/licenses/gpl-2.0.html
