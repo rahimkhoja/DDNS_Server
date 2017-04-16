@@ -7,18 +7,26 @@ An open source dynamic dns server solution. Known to work with DDNS clients incl
 
 #### Table of Contents
 * [Features](#features)
-* [Community Support](#community--support)
-* [Pools Using This Software](#pools-using-this-software)
-* [Usage](#usage)
-  * [Requirements](#requirements)
-  * [Downloading & Installing](#1-downloading--installing)
-  * [Configuration](#2-configuration)
-  * [Configure Easyminer](#3-optional-configure-cryptonote-easy-miner-for-your-pool)
-  * [Starting the Pool](#4-start-the-pool)
-  * [Host the front-end](#5-host-the-front-end)
-  * [Customizing your website](#6-customize-your-website)
-  * [Upgrading](#upgrading)
-* [JSON-RPC Commands from CLI](#json-rpc-commands-from-cli)
+* [Support](#community--support)
+* [Update API](#pools-using-this-software)
+* [Installation Requirements](#usage)
+  * [Single Server](#requirements)
+  * [Single Server with Two DNS Slaves](#1-downloading--installing)
+* [Installation Instructions](#usage)
+  * [Single Server](#3-optional-configure-cryptonote-easy-miner-for-your-pool)
+    * [Install CentOS 7 Minimal](#4-start-the-pool)
+    * [Compile & Install Bind with DLZ Support](#5-host-the-front-end)
+    * [Install Tomcat](#6-customize-your-website)
+    * [Setup Database](#4-start-the-pool)
+    * [Finalizing System Configuration](#4-start-the-pool)
+    * [Starting the DDNS Server](#4-start-the-pool)
+    * [Logging in to Web Admin](#4-start-the-pool)
+  * [Slave Server](#upgrading)
+    * [Install CentOS 7 Minimal](#4-start-the-pool)
+    * [Compile & Install Bind with DLZ Support](#5-host-the-front-end)
+    * [Setup Slave Database](#4-start-the-pool)
+    * [Finalizing Slave System Configuration](#4-start-the-pool)
+* [Registra Nameserver Configuration](#json-rpc-commands-from-cli)
 * [Monitoring Your Pool](#monitoring-your-pool)
 * [Donations](#donations)
 * [License](#license)
@@ -27,28 +35,13 @@ An open source dynamic dns server solution. Known to work with DDNS clients incl
 
 #### Basic features
 
-* Am update API based on the Dyndns2 protocal
-  * Makes this compatible with most DDNS clients
-* Fully functional web application for managment of hosts and user profile information.
-* Multiple DNS Server setup for redundancy.
-* Payment processing
-  * Splintered transactions to deal with max transaction size
-  * Minimum payment threshold before balance will be paid out
-  * Minimum denomination for truncating payment amount precision to reduce size/complexity of block transactions
-* Detailed logging
-* Ability to configure multiple ports - each with their own difficulty
-* Variable difficulty / share limiter
-* Share trust algorithm to reduce share validation hashing CPU load
-* Clustering for vertical scaling
-* Modular components for horizontal scaling (pool server, database, stats/API, payment processing, front-end)
-* Live stats API (using AJAX long polling with CORS)
-  * Currency network/block difficulty
-  * Current block height
-  * Network hashrate
-  * Pool hashrate
-  * Each miners' individual stats (hashrate, shares submitted, pending balance, total paid, etc)
-  * Blocks found (pending, confirmed, and orphaned)
-* An easily extendable, responsive, light-weight front-end using API to display data
+* REST Based Update API based on the Dyndns2 protocol
+* Compatible with most DDNS clients
+* Fully functional web application for managment of hosts and user profile information
+* Designed for multiple slave DNS Servers
+* IPv4 DNS Record Updates
+* Basic user signup, forgot, and login functionlaity
+* Built on CentOS 7 with Bind 9.1x(compiled with DLZ support), Tomcat 9, and MaridbDB
 
 
 Donations
