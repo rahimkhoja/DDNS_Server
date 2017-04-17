@@ -34,6 +34,7 @@ An open source dynamic dns server solution. Known to work with DDNS clients incl
 
 
 #### Features
+-------------
 
 * REST Based Update API based on the Dyndns2 protocol
 * Compatible with most DDNS clients
@@ -44,8 +45,8 @@ An open source dynamic dns server solution. Known to work with DDNS clients incl
 * Built on CentOS 7 with Bind 9.1x(compiled with DLZ support), Tomcat 9, and MaridbDB
 
 
-Support
--------
+#### Support
+------------
 
 Since I am extreemly lazy I am not going to offer support. Well maybe every once n a while. This project is an Eclipse workspace folder, so it should be pretty easy for someone to import it into Eclipse and make fixes or changes to the software.
 
@@ -54,8 +55,8 @@ Sites running this software:
 http://www.hiive.biz
 
 
-Donations
----------
+#### Donations
+--------------
 
 Many Bothans died getting this software to you. Honor them by sending me some BTC or XMR.
 
@@ -63,8 +64,8 @@ Many Bothans died getting this software to you. Honor them by sending me some BT
  * XMR: 42VxjBpfi4TS6KFjNrrKo3QLcyK7gBGfM9w7DxmGRcocYnEbJ1hhZWXfaHJtCXBxnL74DpkioPSivjRYU8qkt59s3EaHUU3
 
 
-License
--------
+#### License
+------------
 
 Released under the GNU General Public License v2
 
