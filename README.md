@@ -7,7 +7,7 @@ An open source dynamic dns server solution. Known to work with DDNS clients incl
 
 #### Table of Contents
 * [Features](#features)
-* [Support](#community--support)
+* [Support](#support)
 * [Update API](#pools-using-this-software)
 * [Installation Requirements](#usage)
   * [Single Server](#requirements)
