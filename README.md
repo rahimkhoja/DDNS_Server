@@ -5,7 +5,7 @@ An open source dynamic dns server solution. Known to work with DDNS clients incl
 
 
 
-#### Table of Contents
+### Table of Contents
 * [Features](#features)
 * [Support](#support)
 * [Update API](#update-api)
@@ -35,7 +35,7 @@ An open source dynamic dns server solution. Known to work with DDNS clients incl
 
 
 
-#### Features
+### Features
 -------------
 
 * REST Based Update API based on the Dyndns2 protocol
@@ -47,7 +47,7 @@ An open source dynamic dns server solution. Known to work with DDNS clients incl
 * Built on CentOS 7 with Bind 9.1x(compiled with DLZ support), Tomcat 9, and MaridbDB
 
 
-#### Support
+### Support
 ------------
 
 Since I am extreemly lazy I am not going to offer support. Well maybe every once n a while. This project is an Eclipse workspace folder, so it should be pretty easy for someone to import it into Eclipse and make fixes or changes to the software.
@@ -57,22 +57,59 @@ Sites running this software:
 http://www.hiive.biz
 
 
-#### Update API
+### Update API
 ------------
 
 The update API was designed to mimic the dyndns2 protocol in order to make it compatible most DDNS clients. Once the Dynamic DNS Server is installed and running the API is avaialble. To access the API you will need credentials from the web application in order to use the API's Http Basic Authentication. 
 
-Update API Stucture:
+#### API Stucture
+-----------------
 
-http://{username}:{password}@{yourdomain or ip address}/ddns/update?&hostname={hostname}&myip={IP Address}
+http://{username}:{password}@{yourdomain.tld or ip address}/ddns/update?&hostname={hostname}&myip={IP Address}
 
 
-### API Parameters
+#### API Parameters
+-------------------
+
+**username** [REQUIRED]
+Your Hiive.biz account username.
+
+**password** [REQUIRED]
+Your Hiive.biz account password.
+
+**hostname** [REQUIRED]
+Comma separated list of your Hiive.biz hostnames to update (up to 10 hostnames per request).
+
+**myip** [Optional]
+The IP v4 Address that your Hiive.biz hostname(s) will be updated to. If no IP Address is specified the Hiive.biz system will attempt to obtain the IP Address.
+
+
+
+#### API Responses
 ------------------
 
+**good**
+IP Address for specified Hosts have been updated.
 
-#### Donations
---------------
+**nochg**
+There is no update or change required. (No need to update more than once an hour without an IP change)
+
+**nohost**
+One or more Hosts are invalid.
+
+**numhost**
+More than the maximum of ten Hosts specified.
+
+**badaddress**
+IP Address form is invalid.
+
+
+#### API Examples
+-----------------
+
+
+### Donations
+-------------
 
 Many Bothans died getting this software to you. Honor them by sending me some BTC or XMR.
 
@@ -80,8 +117,8 @@ Many Bothans died getting this software to you. Honor them by sending me some BT
  * XMR: 42VxjBpfi4TS6KFjNrrKo3QLcyK7gBGfM9w7DxmGRcocYnEbJ1hhZWXfaHJtCXBxnL74DpkioPSivjRYU8qkt59s3EaHUU3
 
 
-#### License
-------------
+### License
+-----------
 
 Released under the GNU General Public License v2
 
