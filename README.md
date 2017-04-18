@@ -67,26 +67,22 @@ The update API was designed to mimic the dyndns2 protocol in order to make it co
 http://{username}:{password}@{yourdomain.tld or ip address}/ddns/update?&hostname={hostname}&myip={IP Address}
 
 
-#### API Parameters:
+  #### API Parameters:
 
-> **username** [REQUIRED]
-
-> Your Hiive.biz account username.
-
-
-> **password** [REQUIRED]
-
-> Your Hiive.biz account password.
+  > **username** [REQUIRED]
+  > Your Hiive.biz account username.
 
 
-> **hostname** [REQUIRED]
+  > **password** [REQUIRED]
+  > Your Hiive.biz account password.
 
-> Comma separated list of your Hiive.biz hostnames to update (up to 10 hostnames per request).
+
+  > **hostname** [REQUIRED]
+  > Comma separated list of your Hiive.biz hostnames to update (up to 10 hostnames per request).
 
 
-> **myip** [Optional]
-
-> The IP v4 Address that your Hiive.biz hostname(s) will be updated to. If no IP Address is specified the Hiive.biz system will attempt to obtain the IP Address.
+  > **myip** [Optional]
+  > The IP v4 Address that your Hiive.biz hostname(s) will be updated to. If no IP Address is specified the Hiive.biz system will attempt to obtain the IP Address.
 
 
 
