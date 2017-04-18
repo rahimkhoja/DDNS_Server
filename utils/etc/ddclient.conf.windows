@@ -1,0 +1,10 @@
+# ddclient.conf
+#
+daemon=5m
+protocol=dyndns2
+use=web
+server=www.hiive.biz
+ssl=no, script=/ddns/update
+login=username
+password=password
+host1.example.com,host9.domain.ca
