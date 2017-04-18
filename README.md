@@ -57,6 +57,20 @@ Sites running this software:
 http://www.hiive.biz
 
 
+#### Update API
+------------
+
+The update API was designed to mimic the dyndns2 protocol in order to make it compatible most DDNS clients. Once the Dynamic DNS Server is installed and running the API is avaialble. To access the API you will need credentials from the web application in order to use the API's Http Basic Authentication. 
+
+Update API Stucture:
+
+http://{username}:{password}@{yourdomain or ip address}/ddns/update?&hostname={hostname}&myip={IP Address}
+
+
+### API Parameters
+------------------
+
+
 #### Donations
 --------------
 
