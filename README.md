@@ -69,24 +69,24 @@ http://{username}:{password}@{yourdomain.tld or ip address}/ddns/update?&hostnam
 
 #### API Parameters:
 
-**username** [REQUIRED]
+> **username** [REQUIRED]
 
-Your Hiive.biz account username.
-
-
-**password** [REQUIRED]
-
-Your Hiive.biz account password.
+> Your Hiive.biz account username.
 
 
-**hostname** [REQUIRED]
+> **password** [REQUIRED]
 
-Comma separated list of your Hiive.biz hostnames to update (up to 10 hostnames per request).
+> Your Hiive.biz account password.
 
 
-**myip** [Optional]
+> **hostname** [REQUIRED]
 
-The IP v4 Address that your Hiive.biz hostname(s) will be updated to. If no IP Address is specified the Hiive.biz system will attempt to obtain the IP Address.
+> Comma separated list of your Hiive.biz hostnames to update (up to 10 hostnames per request).
+
+
+> **myip** [Optional]
+
+> The IP v4 Address that your Hiive.biz hostname(s) will be updated to. If no IP Address is specified the Hiive.biz system will attempt to obtain the IP Address.
 
 
 
