@@ -1,5 +1,5 @@
 [Unit]
-Description=Apache Tomcat Web Application Container
+Description=Apache Tomcat
 After=syslog.target network.target
 
 [Service]
