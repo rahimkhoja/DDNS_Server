@@ -5,8 +5,9 @@ After=network.target
 [Service]
 Type=simple
 Restart=always
-RestartSec=60
-ExecStart=/usr/sbin/named -u named -c /etc/named.conf -f -d 9
+RestartSec=1
+ExecStart=/usr/sbin/named -u named -c /etc/named.conf -f
+WorkingDirectory=/var/named
 
 [Install]
 WantedBy=multi-user.target
