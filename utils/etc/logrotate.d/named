@@ -1,0 +1,8 @@
+/var/log/named/query.log {
+    missingok
+    notifempty
+    compress
+    size 1024k
+    daily
+    create 0600 named named
+}
