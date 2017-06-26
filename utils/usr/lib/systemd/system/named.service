@@ -6,7 +6,7 @@ After=network.target
 Type=simple
 Restart=always
 RestartSec=1
-ExecStart=/usr/sbin/named -u named -c /etc/named.conf -f
+ExecStart=/usr/sbin/named -u named -c /etc/named.conf -g
 WorkingDirectory=/var/named
 
 [Install]
