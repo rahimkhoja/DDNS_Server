@@ -17,3 +17,5 @@ mysql -u $user -D $dbname -p$password -e "UPDATE dyn_server_db.dyn_users SET for
 mysql -u $user -D $dbname -p$password -e "DELETE FROM dyn_server_db.dyn_users WHERE ( enable_date IS null OR enable_date='0000-0-0' ) AND enabled=0 AND create_date <= (now() - INTERVAL 1 DAY);"
 
 echo "DDNS Cron Script Ran On $dt " >> /var/ddns/log/ddns-$d.log
+
+# SELECT CONCAT(dyn_hosts.hostname, '.', dyn_domains.domain_name) AS all_hosts FROM dyn_server_db.dyn_domains, dyn_server_db.dyn_hosts WHERE dyn_hosts.domain_id = dyn_domains.id;
