@@ -1,9 +1,33 @@
 #!/bin/sh
-# DDNS Slave DNS Server Deployment
-# for CentOS 7 
+# Dynamic DNS Server - Slave Name Server Deployment
+# Requires: CentOS 7.*
 # By Rahim Khoja (rahim@khoja.ca)
 
-# Default Properties
+echo
+echo -e "\033[0;31m░░░░░░░░▀▀▀██████▄▄▄"
+echo "░░░░░░▄▄▄▄▄░░█████████▄ "
+echo "░░░░░▀▀▀▀█████▌░▀▐▄░▀▐█ "
+echo "░░░▀▀█████▄▄░▀██████▄██ "
+echo "░░░▀▄▄▄▄▄░░▀▀█▄▀█════█▀"
+echo "░░░░░░░░▀▀▀▄░░▀▀███░▀░░░░░░▄▄"
+echo "░░░░░▄███▀▀██▄████████▄░▄▀▀▀██▌"
+echo "░░░██▀▄▄▄██▀▄███▀▀▀▀████░░░░░▀█▄"
+echo "▄▀▀▀▄██▄▀▀▌█████████████░░░░▌▄▄▀"
+echo "▌░░░░▐▀████▐███████████▌"
+echo "▀▄░░▄▀░░░▀▀██████████▀"
+echo "░░▀▀░░░░░░▀▀█████████▀"
+echo "░░░░░░░░▄▄██▀██████▀█"
+echo "░░░░░░▄██▀░░░░░▀▀▀░░█"
+echo "░░░░░▄█░░░░░░░░░░░░░▐▌"
+echo "░▄▄▄▄█▌░░░░░░░░░░░░░░▀█▄▄▄▄▀▀▄"
+echo -e "▌░░░░░▐░░░░░░░░░░░░░░░░▀▀▄▄▄▀\033[0m"
+echo "---Dynamic DNS Server - Slave Name Server Deployment Script---"
+echo "---By: Rahim Khoja (rahim@khoja.ca)---"
+echo
+echo " Please note, this script has only been tested with users who are under 5 foot 8 inches in height!"
+echo
+
+# Default Variables
 defaultslave=2
 defaultmasterhost=172.16.254.40
 defaultmasterpass=password
