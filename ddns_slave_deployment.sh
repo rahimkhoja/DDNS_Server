@@ -1,7 +1,7 @@
 #!/bin/sh
 # DDNS Slave DNS Server Deployment
 # for CentOS 7 
-# By Rahim Khoja (rahimk@khojacorp.com)
+# By Rahim Khoja (rahim@khoja.ca)
 
 # Default Properties
 defaultslave=2
