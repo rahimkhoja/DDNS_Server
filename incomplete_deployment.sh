@@ -1,3 +1,32 @@
+#!/bin/sh
+# Dynamic DNS Server - Master Name Server Deployment
+# Requires: CentOS 7.*
+# Note: Incomplete
+# By Rahim Khoja (rahim@khoja.ca)
+
+echo
+echo -e "\033[0;31m░░░░░░░░▀▀▀██████▄▄▄"
+echo "░░░░░░▄▄▄▄▄░░█████████▄ "
+echo "░░░░░▀▀▀▀█████▌░▀▐▄░▀▐█ "
+echo "░░░▀▀█████▄▄░▀██████▄██ "
+echo "░░░▀▄▄▄▄▄░░▀▀█▄▀█════█▀"
+echo "░░░░░░░░▀▀▀▄░░▀▀███░▀░░░░░░▄▄"
+echo "░░░░░▄███▀▀██▄████████▄░▄▀▀▀██▌"
+echo "░░░██▀▄▄▄██▀▄███▀▀▀▀████░░░░░▀█▄"
+echo "▄▀▀▀▄██▄▀▀▌█████████████░░░░▌▄▄▀"
+echo "▌░░░░▐▀████▐███████████▌"
+echo "▀▄░░▄▀░░░▀▀██████████▀"
+echo "░░▀▀░░░░░░▀▀█████████▀"
+echo "░░░░░░░░▄▄██▀██████▀█"
+echo "░░░░░░▄██▀░░░░░▀▀▀░░█"
+echo "░░░░░▄█░░░░░░░░░░░░░▐▌"
+echo "░▄▄▄▄█▌░░░░░░░░░░░░░░▀█▄▄▄▄▀▀▄"
+echo -e "▌░░░░░▐░░░░░░░░░░░░░░░░▀▀▄▄▄▀\033[0m"
+echo "---Dynamic DNS Server - Master Name Server Deployment Script---"
+echo "---By: Rahim Khoja (rahim@khoja.ca)---"
+echo
+echo " Please note, this script has only been tested with users who are under 5 foot 8 inches in height!"
+echo
 
 # System Update
 yum -y update && yum -y upgrade
