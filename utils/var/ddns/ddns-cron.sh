@@ -1,7 +1,32 @@
-#!/bin/bash
-# DDNS Cron Script
-# By Rahim Khoja for DDNS Server
+#!/bin/sh
+# Dynamic DNS Server - Cron Script
+# By Rahim Khoja (rahim@khoja.ca)
 
+echo
+echo -e "\033[0;31m░░░░░░░░▀▀▀██████▄▄▄"
+echo "░░░░░░▄▄▄▄▄░░█████████▄ "
+echo "░░░░░▀▀▀▀█████▌░▀▐▄░▀▐█ "
+echo "░░░▀▀█████▄▄░▀██████▄██ "
+echo "░░░▀▄▄▄▄▄░░▀▀█▄▀█════█▀"
+echo "░░░░░░░░▀▀▀▄░░▀▀███░▀░░░░░░▄▄"
+echo "░░░░░▄███▀▀██▄████████▄░▄▀▀▀██▌"
+echo "░░░██▀▄▄▄██▀▄███▀▀▀▀████░░░░░▀█▄"
+echo "▄▀▀▀▄██▄▀▀▌█████████████░░░░▌▄▄▀"
+echo "▌░░░░▐▀████▐███████████▌"
+echo "▀▄░░▄▀░░░▀▀██████████▀"
+echo "░░▀▀░░░░░░▀▀█████████▀"
+echo "░░░░░░░░▄▄██▀██████▀█"
+echo "░░░░░░▄██▀░░░░░▀▀▀░░█"
+echo "░░░░░▄█░░░░░░░░░░░░░▐▌"
+echo "░▄▄▄▄█▌░░░░░░░░░░░░░░▀█▄▄▄▄▀▀▄"
+echo -e "▌░░░░░▐░░░░░░░░░░░░░░░░▀▀▄▄▄▀\033[0m"
+echo "---Dynamic DNS Server - Cron Script---"
+echo "---By: Rahim Khoja (rahim@khoja.ca)---"
+echo
+echo " Please note, this script has only been tested with users who are under 5 foot 8 inches in height!"
+echo
+
+# Default Variables
 d=$(date +%Y-%m-%d)
 dt=$(date '+%d/%m/%Y %H:%M:%S');
 
