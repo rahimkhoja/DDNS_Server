@@ -154,10 +154,7 @@ For quick deployment please ensure:
 #### As Root Type
 ```bash
 yum install -y git
-cd ~
-git clone https://github.com/CanadianRepublican/BitcoinCash-Daemon-Deployment-CentOS7.git BCH-Deploy
-cd BCH-Deploy
-bash deploy-bch-daemon.sh
+# Need to fill this in
 
 ```
 
@@ -167,14 +164,15 @@ bash deploy-bch-daemon.sh
 ### Useful Links
 -----------------
 
-*Bitcoin Cash GitHub:*
+*Bind - Internet Systems Consortium:*
 
-https://github.com/Bitcoin-ABC/bitcoin-abc
+https://www.isc.org/downloads/bind/
 
 
-*Bitcoin Core Conf File Example:*
+*Bind with DLZ Support Documentation:*
 
-https://github.com/bitcoin/bitcoin/blob/master/contrib/debian/examples/bitcoin.conf
+http://bind-dlz.sourceforge.net/
+
 
 
 
