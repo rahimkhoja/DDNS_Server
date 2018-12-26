@@ -1,7 +1,7 @@
 Dynamic DNS Server  - Please note the Readme is a Work in Progress
 ==================
 
-An open source dynamic dns server solution. Known to work with DDNS clients including ddclient, DD-WRT, Tomato, as well as most others. The Dynamic DNS server Leverages Bind with dlz support, Tomcat, and MariaDB to provide dynamic dns services and updates.   
+An open source dns server solution with web management application. Offering Dynamic DNS functaionalty that is known to work with DDNS clients including ddclient, DD-WRT, Tomato, as well as most others. The DNS server leverages Bind with dlz support, Tomcat, MariaDB(or MySQL), and NGINX, to a provide web managed, highly avaialbe, dns server.   
 
 
 
@@ -11,12 +11,12 @@ An open source dynamic dns server solution. Known to work with DDNS clients incl
 ---------------------
 
 * [Features](#features)
+* [Requirements](#requirements)
 * [Support](#support)
 * [Update API](#update-api)
   * [API Parameters](#api-parameters)
   * [API Responses](#api-responses)
   * [API Examples](#api-examples)
-* [Requirements](#requirements)
    * [Server with Two or more DNS Slaves](#requirements-mutiple)
 * [Installation Instructions](#install)
   * [Master Server](#basic-install)
@@ -42,13 +42,28 @@ An open source dynamic dns server solution. Known to work with DDNS clients incl
 ### Features
 ------------
 
-* REST Based Update API based on the Dyndns2 protocol
-* Compatible with most DDNS clients
-* Fully functional web application for managment of hosts and user profile information
-* Designed for multiple slave DNS Servers
-* IPv4 DNS Record Updates
-* Basic user signup, forgot, and login functionlaity
-* Built on CentOS 7 with Bind 9.1x(compiled with DLZ support), Tomcat 9, and MaridbDB
+* REST Based Update API based on the Dyndns2 protocol.
+* Compatible with most DDNS clients.
+* Fully functional web application for managment of hosts and user profile information.
+* Designed for multiple slave DNS Servers.
+* IPv4 DNS Record Updates.
+* Basic user signup, forgot, and login functionlaity.
+* Built on CentOS 7 with Bind 9.1x(compiled with DLZ support), Tomcat 9, and MaridbDB.
+* Comming Soon - Many new DNS record types will be added. Ultimatly this will become a fully managed high availablity DNS server.
+* Comming Soon - Ansible Deployment Scripts for Master and Slaves.
+* Comming Soon - NGINX Slave Load Balanceing. 
+* Comming Soon - New User Authentication Methods. (FreeIPA?, LDAP?)
+
+
+
+### Requirements
+-------------
+
+* At least 3 CentOS 7.* Virtual Machines or Servers. 
+* SSH Access to all DDNS Servers. 
+* If publically accessable, Port 53 (UDP) must be open from each slave DNS server to (and from) the internet.
+
+
 
 
 
@@ -57,7 +72,7 @@ An open source dynamic dns server solution. Known to work with DDNS clients incl
 
 Since I am extremely lazy I am not going to offer any support. Well maybe every once-n-a while. It really depends on my mood. 
 
-That being said, time was spent documenting each command in the scripts. This should allow the scripts to be easily understood and modified if needed. 
+That being said, time was spent documenting each code section in the DNS Server. This should allow the scripts to be easily understood and modified if needed. 
 
 
 
@@ -118,41 +133,6 @@ IP Address form is invalid.
 
 
 
-
- 
- 
- 
- 
- 
- 
- 
- 
- 
- # BitcoinCash-Daemon-Deployment-CentOS7
-
-A simple bash script to deploy a Bitcoin Cash Daemon on CentOS 7. (BCH)
-
-
-
-
-
-### Features
--------------
-
-* Installs and configures the Bitcoin Cash Daemon on CentOS 7.
-* Configures Systemd and Logrotate for use with the Bitcoin Cash Daemon.
-* Documentation.
-
-
-
-### Requirements
--------------
-
-* Root access to a CentOS 7.* Server with enough space to host the BCH blockchain. (500GB or more)
-* Internet Access.  
-
-
-
 ### Included Files
 ------------------
 
@@ -201,7 +181,7 @@ https://github.com/bitcoin/bitcoin/blob/master/contrib/debian/examples/bitcoin.c
 ### Donations
 -------------
 
-Many Bothans died getting these scripts to you, honor them by sending me some Bitcoin(BTC), or Ethereum(ETH).
+Many Bothans died getting this DNS server to you, honor them by sending me some Bitcoin(BTC), or Ethereum(ETH).
 
  * BTC: 1K4N5msYZHse6Hbxz4oWUjwqPf8wu6ducV
  * ETH: 0x76AB557F159a5048fA944566dbb18C834228d4e7
