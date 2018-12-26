@@ -5,18 +5,21 @@ An open source dynamic dns server solution. Known to work with DDNS clients incl
 
 
 
+
+
 ### Table of Contents
+---------------------
+
 * [Features](#features)
 * [Support](#support)
 * [Update API](#update-api)
   * [API Parameters](#api-parameters)
   * [API Responses](#api-responses)
   * [API Examples](#api-examples)
-* [Installation Requirements](#requirements)
-  * [Single Server](#requirements-single)
-  * [Server with Two or more DNS Slaves](#requirements-mutiple)
+* [Requirements](#requirements)
+   * [Server with Two or more DNS Slaves](#requirements-mutiple)
 * [Installation Instructions](#install)
-  * [Single Server](#basic-install)
+  * [Master Server](#basic-install)
     * [Install CentOS 7 Minimal](#4-start-the-pool)
     * [Compile & Install Bind with DLZ Support](#5-host-the-front-end)
     * [Install Tomcat](#6-customize-your-website)
@@ -30,13 +33,14 @@ An open source dynamic dns server solution. Known to work with DDNS clients incl
     * [Setup Slave Database](#4-start-the-pool)
     * [Finalizing Slave System Configuration](#4-start-the-pool)
 * [Registra Nameserver Configuration](#registra)
+* [Useful Links](#useful-links)
 * [Donations](#donations)
 * [License](#license)
 
 
 
 ### Features
--------------
+------------
 
 * REST Based Update API based on the Dyndns2 protocol
 * Compatible with most DDNS clients
@@ -47,14 +51,14 @@ An open source dynamic dns server solution. Known to work with DDNS clients incl
 * Built on CentOS 7 with Bind 9.1x(compiled with DLZ support), Tomcat 9, and MaridbDB
 
 
+
 ### Support
-------------
+-----------
 
-Since I am extreemly lazy I am not going to offer support. Well maybe every once n a while. This project is an Eclipse workspace folder, so it should be pretty easy for someone to import it into Eclipse and make fixes or changes to the software.
+Since I am extremely lazy I am not going to offer any support. Well maybe every once-n-a while. It really depends on my mood. 
 
-Sites running this software:
+That being said, time was spent documenting each command in the scripts. This should allow the scripts to be easily understood and modified if needed. 
 
-http://www.hiive.biz
 
 
 ### Update API
@@ -114,18 +118,101 @@ IP Address form is invalid.
 
 
 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ # BitcoinCash-Daemon-Deployment-CentOS7
+
+A simple bash script to deploy a Bitcoin Cash Daemon on CentOS 7. (BCH)
+
+
+
+
+
+### Features
+-------------
+
+* Installs and configures the Bitcoin Cash Daemon on CentOS 7.
+* Configures Systemd and Logrotate for use with the Bitcoin Cash Daemon.
+* Documentation.
+
+
+
+### Requirements
+-------------
+
+* Root access to a CentOS 7.* Server with enough space to host the BCH blockchain. (500GB or more)
+* Internet Access.  
+
+
+
+### Included Files
+------------------
+
+* Bitcoin Cash daemon deployment Bash script for CentOS 7.
+* Bitcoin Cash daemon systemd service file. 
+* Bitcoin Cash logrotate configuration file.
+* Bitcoin Cash configuration file.
+
+
+
+### Quick Deployment Instrcutions (Work in Progress)
+-----------
+
+For quick deployment please ensure:
+
+* Root access to an updated CentOS 7 server. 
+
+
+#### As Root Type
+```bash
+yum install -y git
+cd ~
+git clone https://github.com/CanadianRepublican/BitcoinCash-Daemon-Deployment-CentOS7.git BCH-Deploy
+cd BCH-Deploy
+bash deploy-bch-daemon.sh
+
+```
+
+
+
+
+### Useful Links
+-----------------
+
+*Bitcoin Cash GitHub:*
+
+https://github.com/Bitcoin-ABC/bitcoin-abc
+
+
+*Bitcoin Core Conf File Example:*
+
+https://github.com/bitcoin/bitcoin/blob/master/contrib/debian/examples/bitcoin.conf
+
+
+
 ### Donations
 -------------
 
-Many Bothans died getting this software to you. Honor them by sending me some BTC or XMR.
+Many Bothans died getting these scripts to you, honor them by sending me some Bitcoin(BTC), or Ethereum(ETH).
 
  * BTC: 1K4N5msYZHse6Hbxz4oWUjwqPf8wu6ducV
- * XMR: 42VxjBpfi4TS6KFjNrrKo3QLcyK7gBGfM9w7DxmGRcocYnEbJ1hhZWXfaHJtCXBxnL74DpkioPSivjRYU8qkt59s3EaHUU3
+ * ETH: 0x76AB557F159a5048fA944566dbb18C834228d4e7
+
+
 
 
 ### License
 -----------
 
-Released under the GNU General Public License v2
+Released under the GNU General Public License v3. (Not sure this is even valid)
 
- * http://www.gnu.org/licenses/gpl-2.0.html
+ * http://www.gnu.org/licenses/gpl-3.0.html
+
