@@ -1,8 +1,10 @@
-Dynamic DNS Server  - Please note the Readme is a Work in Progress
-==================
+DNS Server
+==========
+
+Under Construction
+------------------
 
 An open source dns server solution with web management application. Offering Dynamic DNS functaionalty that is known to work with DDNS clients including ddclient, DD-WRT, Tomato, as well as most others. The DNS server leverages Bind with dlz support, Tomcat, MariaDB(or MySQL), and NGINX, to a provide web managed, highly avaialbe, dns server.   
-
 
 
 
