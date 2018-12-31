@@ -4,7 +4,7 @@ DNS Server
 Under Construction
 ------------------
 
-An open source DNS Server Solution that includes a Web Management System, a Restful API, Dynamic DNS functionality, and a High Availability design. The web interface allows users to manage all DNS entry types, the adding and removal of their own domains, and a simple user control mechanism. If the DNS Server load becomes to high simple depoloy additional slave DNS Servers. Dynamic DNS clients such as ddclient, DD-WRT, Tomato, are known to work with DNS Server. DNS Server is built on top of technologies such as Bind with DLZ Support, Tomcat 9.x, MariaDB(or MySQL 5.7+), NGINX, Ansible, and CentOS 7.x.
+An open source DNS Server Solution that includes a Web Management System, a Restful API, Dynamic DNS functionality, and a High Availability design. The web interface allows users to manage all DNS entry types, the adding and removal of their own domains, and a simple user control mechanism. DNS Server is horozontally scalable, thus if the load becomes to high simple depoloy additional slave DNS Servers. Dynamic DNS clients such as ddclient, DD-WRT, Tomato, are known to work with DNS Server. DNS Server is built on top of technologies such as Bind with DLZ Support, Tomcat 9.x, MariaDB(or MySQL 5.7+), NGINX, Ansible, and CentOS 7.x.
 
 
 
