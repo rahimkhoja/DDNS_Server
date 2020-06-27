@@ -122,22 +122,8 @@ GRANT SELECT,UPDATE,DELETE on dyn_server_db.dyn_users to 'dyn_cron_user'@'localh
 
 flush privileges;
 
-sudo firewall-cmd --zone=public --permanent --add-port=80/tcp
-sudo firewall-cmd --zone=public --permanent --add-port=80/udp
-sudo firewall-cmd --zone=public --permanent --add-port=443/udp
-sudo firewall-cmd --zone=public --permanent --add-port=443/tcp
-sudo firewall-cmd --zone=public --permanent --add-port=8080/tcp
-sudo firewall-cmd --zone=public --permanent --add-port=8080/udp
 
-sudo firewall-cmd --zone=public --permanent --add-port=3306/tcp
-sudo firewall-cmd --zone=public --permanent --add-port=3306/udp
-
-sudo systemctl enable firewalld
-sudo firewall-cmd --zone=public --permanent --add-port=53/udp
-sudo firewall-cmd --zone=public --permanent --add-port=53/tcp
-sudo firewall-cmd --reload
-sudo firewall-cmd --zone=public --permanent --list-ports
-
+service firewalld stop
 
 // On Slave DNS
 mysqldump -h 172.16.254.40 -u dyn_dns_user -p dyn_server_db xfr_table dyn_dns_records > dyn_server_db.sql
@@ -146,8 +132,8 @@ mysql -u root -p dyn_server_db < dyn_server_db.sql
 sudo systemctl restart mariadb 
 
 
-Start Master my.cnf
-bind-address = 0.0.0.0
+cat <<EOF >>/etc/my.cnf.master
+bind-address=0.0.0.0
 server-id=1
 log-bin
 binlog-format=row
@@ -156,17 +142,18 @@ binlog-do-db=dyn_server_db
 log-slave-updates
 replicate-do-table=dyn_server_db.dyn_dns_records
 replicate-do-table=dyn_server_db.xfr_table
+EOF
 
-end my.cnf
 
 
-Start Slave my.cnf
-server-id=3
+slave-number=3
+cat <<EOF >>/etc/my.cnf.slave-${slave-number}
+server-id=${slave-number}
 binlog_do_db=dyn_server_db
 replicate-do-table=dyn_server_db.dyn_dns_records
 replicate-do-table=dyn_server_db.xfr_table
-bind-address = 127.0.0.1
-end my.cnf
+bind-address=127.0.0.1
+EOF
 
 GRANT REPLICATION SLAVE ON *.* TO 'dyn_replicator'@'172.16.%.%' IDENTIFIED BY 'Password!';
 grant all on dyn_server_db.* to 'dyn_web_app'@'172.16.254.%' identified by 'Password!';
@@ -185,4 +172,15 @@ mv apache-tomcat-9.0.0.M21 /opt/tomcat
 cd /opt
 chown -hR tomcat:tomcat tomcat
 
+
+# Setup FirewallD
+firewall-cmd --zone=public --permanent --add-service=http
+firewall-cmd --zone=public --permanent --add-service=https
+firewall-cmd --zone=public --permanent --add-service=mysql
+firewall-cmd --zone=public --permanent --add-service=dns
+firewall-cmd --zone=public --permanent --add-port=8080/tcp
+firewall-cmd --zone=public --permanent --add-port=8080/udp
+firewall-cmd --reload
+firewall-cmd --zone=public --permanent --list-ports
 systemctl enable firewalld
+service firewalld start
