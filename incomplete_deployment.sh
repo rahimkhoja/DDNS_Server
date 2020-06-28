@@ -262,10 +262,42 @@ echo "$(date \"+%FT%T\") $STATUS" >> "${LOGFILE}"
 
 # Install Required Packages & Update System
 STATUS="Install Yum Packages"
+yum -y install epel-release
 yum -y groupinstall 'Development Tools'
-yum -y install mariadb mariadb-server mariadb-devel mariadb-embedded curl wget git openssl policycoreutils-python
+yum -y install chrony cockpit curl firewalld git kexec-tools krb5-devel libselinux-python mail ntp openssh openssl openssl-devel policycoreutils-python postfix sendmail wget yum-utils
 STATUS="Update & Upgrade System"
 yum -y update && yum -y upgrade
+
+# Start & Enable Cockpit
+systemctl start cockpit
+systemctl enable cockpit.socket
+
+# Start & Enable NTP
+systemctl start ntpd 
+systemctl enable ntpd
+ntpq -p
+
+# Setup Postfix
+setsebool -P httpd_can_network_connect true
+setsebool -P httpd_can_sendmail=1
+service postfix start
+systemctl enable postfix
+   
+# Test Postfix  # echo "My message" | postfix -s testpostfix user@domain.com
+# Test Sendmail # echo "My message" | sendmail -s testsendmail user@domain.com
+
+# Backup Original Tomcat Files   
+cp /opt/tomcat/conf/context.xml /opt/tomcat/conf/context.xml.orig
+cp /opt/tomcat/conf/web.xml /opt/tomcat/conf/web.xml.orig
+cp /opt/tomcat/conf/server.xml /opt/tomcat/conf/server.xml.orig
+
+
+   77  cd ..
+   78  ls
+   79  cd webapps/
+   80  ls
+   81  cd ddns
+   82  ls
 
 
 # Check if Varnish is installed.
@@ -280,6 +312,10 @@ if [[ -d "/etc/nginx" ]]; then
     nginx="1" 
 fi
 
+
+
+# stuff
+ssh-keygen -t rsa -b 4096
 
 
 
