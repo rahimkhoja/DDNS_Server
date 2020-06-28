@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Dynamic DNS Server - Master Name Server Deployment
 # Requires: CentOS 7.*
 # Note: Incomplete
@@ -28,10 +28,289 @@ echo
 echo " Please note, this script has only been tested with users who are under 5 foot 8 inches in height!"
 echo
 
-# System Update
-yum -y update && yum -y upgrade
+# Stop on Error
+set -eE  # same as: `set -o errexit -o errtrace`
+
+# Dump Vars Function
+function dump_vars {
+    if ! ${STATUS+false};then echo "STATUS = ${STATUS}";fi
+    if ! ${LOGFILE+false};then echo "LOGFILE = ${LOGFILE}";fi
+    if ! ${SCRIPTDIR+false};then echo "SCRIPTDIR = ${SCRIPTDIR}";fi
+    if ! ${DEBUG+false};then echo "DEBUG = ${DEBUG}";fi
+    if ! ${PUBLICIP+false};then echo "PUBLICIP = ${PUBLICIP}";fi
+    if ! ${TIMESTAMP+false};then echo "TIMESTAMP = ${TIMESTAMP}";fi
+    if ! ${finish+false};then echo "finish = ${finish}";fi
+    if ! ${ddnsserver+false};then echo "ddnsserver = ${ddnsserver}";fi
+    if ! ${ddnsmaster+false};then echo "ddnsmaster = ${ddnsmaster}";fi
+    if ! ${MASTERIP+false};then echo "MASTERIP = ${MASTERIP}";fi
+    if ! ${MYSQLPASSWORD+false};then echo "MYSQLPASSWORD = ${MYSQLPASSWORD}";fi
+    if ! ${SLAVEID+false};then echo "SLAVEID = ${SLAVEID}";fi
+}
+
+# Failure Function
+function failure() {
+    local lineno=$1
+    local msg=$2
+    echo ""
+    echo -e "\033[0;31mError at Line Number $lineno: '$msg'\033[0m"
+    echo ""
+    if [[ $DEBUG -eq 1 ]]; then
+      dump_vars
+    fi
+}
+
+# Failure Function Trap
+trap 'failure ${LINENO} "$BASH_COMMAND"' ERR
+
+# Default Variriable Declaration
+LOGFILE=/var/log/DDNS-Server-Setup.log
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+DEBUG=1
+STATUS="Initializing"
+TIMESTAMP="$( date +%s )"
+#PUBLICIP="$(dig @resolver1.opendns.com ANY myip.opendns.com +short)"
+finish="-1"
+ddnsserver="0"
+ddnsmaster="0"
+middleman="0"
+backupconfig="0"
+getpagespeed="0"
+
+# Check the bash shell script is being run by root
+STATUS="Check - Script Run as Root user"
+if [[ $EUID -ne 0 ]];
+then
+    echo "This script must be run as root" 1>&2
+    exit 1
+fi
+
+STATUS="Starting Installation"
+echo "$(date \"+%FT%T\") $STATUS" >> "${LOGFILE}"
+
+# Prompt to Confirm Installation of DDNS Server
+STATUS="Prompt - Do you Want To Install DDNS Server (Master or Slave)"
+finish="-1"
+while [ "$finish" = '-1' ]
+do
+    finish="1"
+    echo
+    read -p "Do you want to set this Install DDNS Server [y/n]? " answer
+
+    if [ "$answer" = '' ];
+    then
+        answer=""
+    else
+        case $answer in
+            y | Y | yes | YES ) answer="y"; ddnsserver="1";;
+            n | N | no | NO ) answer="n"; ddnsserver="0"; exit 1;;
+            *) finish="-1";
+                echo -n 'Invalid Response\n';
+        esac
+    fi
+done
+echo "$(date \"+%FT%T\") $STATUS" >> "${LOGFILE}"
+
+# Prompt to Confirm Setup of DDNS Master or Slave
+STATUS="Prompt - Is This Master Server"
+while [ "$finish" = '-1' ]
+do
+    finish="1"
+    echo
+    read -p "Do you want to set this system up as a DDNS Master Server [y/n]? " answer
+
+    if [ "$answer" = '' ];
+    then
+        answer=""
+    else
+        case $answer in
+            y | Y | yes | YES ) answer="y"; ddnsmaster="1";;
+            n | N | no | NO ) answer="n"; ddnsmaster="0";;
+            *) finish="-1";
+                echo -n 'Invalid Response\n';
+        esac
+    fi
+done
+echo "$(date \"+%FT%T\") $STATUS" >> "${LOGFILE}"
+
+
+
+# If Slave
+   # Propt Master IP
+   # Prompt Master MySQL Server Password
+   # Prompt Slave ID
+
+
+
+
+# Prompt - Slave Server Prompts.
+STATUS="Prompts - Slave Server Inputs"
+echo "$(date \"+%FT%T\") $STATUS" >> "${LOGFILE}"
+if [[ "$ddnsmaster" == "0" ]]; then
+    # Prompt - Master Server IP?
+    STATUS="Prompt - Slave Prompt - What is Master Server IP?"
+    finish="-1"
+    while [ "$finish" = '-1' ]
+    do
+        finish="1"
+        echo
+        read -p "Please enter DDNS Master Server IP Address?: " MASTERIP
+        MASTERIP=${MASTERIP:-""}
+        echo
+        read -p "DDNS Server Master IP: $MASTERIP [y/n]? " answer
+
+        if [ "$answer" = '' ];
+        then
+            answer=""
+        else
+            case $answer in
+                y | Y | yes | YES ) answer="y";;
+                n | N | no | NO ) answer="n"; finish="-1"; ;
+                *) finish="-1";
+                echo -n 'Invalid Response\n';
+            esac
+        fi
+    done
+    echo "$(date \"+%FT%T\") $STATUS" >> "${LOGFILE}"
+
+    # Prompt - Master Server MySQL Password?
+    STATUS="Prompt - Slave Prompt - What is Master Server MySQL Password?"
+    finish="-1"
+    while [ "$finish" = '-1' ]
+    do
+        finish="1"
+        echo
+        read -p "Please enter DDNS Master Server IP Address?: " MYSQLPASSWORD
+        MYSQLPASSWORD=${MYSQLPASSWORD:-""}
+        echo
+        read -p "DDNS Server Master MySQL Password: $MYSQLPASSWORD [y/n]? " answer
+
+        if [ "$answer" = '' ];
+        then
+            answer=""
+        else
+            case $answer in
+                y | Y | yes | YES ) answer="y";;
+                n | N | no | NO ) answer="n"; finish="-1"; ;
+                *) finish="-1";
+                echo -n 'Invalid Response\n';
+            esac
+        fi
+    done    
+    echo "$(date \"+%FT%T\") $STATUS" >> "${LOGFILE}"
+    
+    # Prompt - Slave Server Number?
+    STATUS="Prompt - Slave Prompt - What is the Slave Server ID Number?"
+    finish="-1"
+    while [ "$finish" = '-1' ]
+    do
+        finish="1"
+        echo
+        read -p "Please enter DDNS Slave ID Number that is being Setup?: " SLAVEID
+        SLAVEID=${SLAVEID:-""}
+        echo
+        read -p "DDNS Server Master MySQL Password: $SLAVEID [y/n]? " answer
+
+        if [ "$answer" = '' ];
+        then
+            answer=""
+        else
+            case $answer in
+                y | Y | yes | YES ) answer="y";;
+                n | N | no | NO ) answer="n"; finish="-1"; ;
+                *) finish="-1";
+                echo -n 'Invalid Response\n';
+            esac
+        fi
+    done    
+    echo "$(date \"+%FT%T\") $STATUS" >> "${LOGFILE}"
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+# Prompt to DDNS Slave ID Numberup of DDNS Master or Slave
+STATUS="Prompt - Is This Master Server"
+while [ "$finish" = '-1' ]
+do
+    finish="1"
+    echo
+    read -p "Do you want to set this system up as a DDNS Master Server [y/n]? " answer
+
+    if [ "$answer" = '' ];
+    then
+        answer=""
+    else
+        case $answer in
+            y | Y | yes | YES ) answer="y"; ddnsmaster="1";;
+            n | N | no | NO ) answer="n"; ddnsmaster="0";;
+            *) finish="-1";
+                echo -n 'Invalid Response\n';
+        esac
+    fi
+done
+echo "$(date \"+%FT%T\") $STATUS" >> "${LOGFILE}"
+
+
+
+
+
+
+
+
+
+
+# Install Required Packages & Update System
+STATUS="Install Yum Packages"
 yum -y groupinstall 'Development Tools'
 yum -y install mariadb mariadb-server mariadb-devel mariadb-embedded curl wget git openssl policycoreutils-python
+STATUS="Update & Upgrade System"
+yum -y update && yum -y upgrade
+
+
+# Check if Varnish is installed.
+STATUS="Check - Is Varnish installed"
+if [[ -d "/etc/varnish" ]]; then
+    varnish="1" 
+fi
+
+# Check if NGINX is installed.
+STATUS="Check - Is Nginx installed"
+if [[ -d "/etc/nginx" ]]; then
+    nginx="1" 
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# System Update
+
+
 
 # Clone DDNS Repository
 cd /tmp
