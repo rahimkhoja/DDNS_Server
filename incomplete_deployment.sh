@@ -215,102 +215,57 @@ if [[ "$ddnsmaster" == "0" ]]; then
     echo "$(date \"+%FT%T\") $STATUS" >> "${LOGFILE}"
 fi
 
-
-
-
-# Master Server Prompts
-# -> Automatically Generate Random Password
-# -> (If No) -> Enter Custom Password
-# ->         -> -> Confirm Custom Password
-
-
-
-
-
-
-
-# Prompt to DDNS Slave ID Numberup of DDNS Master or Slave
-STATUS="Prompt - Is This Master Server"
-while [ "$finish" = '-1' ]
-do
-    finish="1"
-    echo
-    read -p "Do you want to set this system up as a DDNS Master Server [y/n]? " answer
-
-    if [ "$answer" = '' ];
-    then
-        answer=""
-    else
-        case $answer in
-            y | Y | yes | YES ) answer="y"; ddnsmaster="1";;
-            n | N | no | NO ) answer="n"; ddnsmaster="0";;
-            *) finish="-1";
-                echo -n 'Invalid Response\n';
-        esac
-    fi
-done
-echo "$(date \"+%FT%T\") $STATUS" >> "${LOGFILE}"
-
-
-
-
-
-
-
-
-
-
 # Install Required Packages & Update System
 STATUS="Install Yum Packages"
 yum -y install epel-release
 yum -y groupinstall 'Development Tools'
-yum -y install chrony cockpit curl firewalld git kexec-tools krb5-devel libselinux-python mail ntp openssh openssl openssl-devel policycoreutils-python postfix sendmail wget yum-utils
+yum -y install chrony cockpit curl dig firewalld git kexec-tools krb5-devel libselinux-python mail ntp openssh openssl openssl-devel policycoreutils-python postfix sendmail wget yum-utils
 STATUS="Update & Upgrade System"
 yum -y update && yum -y upgrade
+echo "$(date \"+%FT%T\") $STATUS" >> "${LOGFILE}"
+
+# Clone DDNS Repository
+cd /tmp
+git clone https://github.com/CanadianRepublican/DDNS_Server.git DDNS
 
 # Start & Enable Cockpit
 systemctl start cockpit
 systemctl enable cockpit.socket
+echo "$(date \"+%FT%T\") $STATUS" >> "${LOGFILE}"
 
 # Start & Enable NTP
 systemctl start ntpd 
 systemctl enable ntpd
 ntpq -p
+echo "$(date \"+%FT%T\") $STATUS" >> "${LOGFILE}"
 
-# Setup Postfix
+# Setup Postfix & SendMail
 setsebool -P httpd_can_network_connect true
 setsebool -P httpd_can_sendmail=1
 service postfix start
 systemctl enable postfix
-   
+service sendmail start
+systemctl enable sendmail   
 # Test Postfix  # echo "My message" | postfix -s testpostfix user@domain.com
 # Test Sendmail # echo "My message" | sendmail -s testsendmail user@domain.com
+echo "$(date \"+%FT%T\") $STATUS" >> "${LOGFILE}"
+
+# Tomcat 9 Install
+yum -y install java-1.8.0-openjdk.x86_64 java-1.8.0-openjdk-devel.x86_64
+cd /tmp
+wget http://apache.mirror.globo.tech/tomcat/tomcat-9/v9.0.0.M21/bin/apache-tomcat-9.0.0.M21.tar.gz
+tar -xzvf apache-tomcat-9.0.0.M21.tar.gz
+mv apache-tomcat-9.0.0.M21 /opt/tomcat
+
+# Tomcat User and Group Setup
+groupadd tomcat 
+useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
+chown -hR tomcat:tomcat /opt/tomcat
 
 # Backup Original Tomcat Files   
 cp /opt/tomcat/conf/context.xml /opt/tomcat/conf/context.xml.orig
 cp /opt/tomcat/conf/web.xml /opt/tomcat/conf/web.xml.orig
 cp /opt/tomcat/conf/server.xml /opt/tomcat/conf/server.xml.orig
-
-
-   77  cd ..
-   78  ls
-   79  cd webapps/
-   80  ls
-   81  cd ddns
-   82  ls
-
-
-# Check if Varnish is installed.
-STATUS="Check - Is Varnish installed"
-if [[ -d "/etc/varnish" ]]; then
-    varnish="1" 
-fi
-
-# Check if NGINX is installed.
-STATUS="Check - Is Nginx installed"
-if [[ -d "/etc/nginx" ]]; then
-    nginx="1" 
-fi
 
 
 
@@ -369,17 +324,7 @@ EOF
 systemctl daemon-reload
 systemctl enable named
 
-# Tomcat 9 Install
-yum -y install java-1.8.0-openjdk.x86_64 java-1.8.0-openjdk-devel.x86_64
-cd /tmp
-wget http://apache.mirror.globo.tech/tomcat/tomcat-9/v9.0.0.M21/bin/apache-tomcat-9.0.0.M21.tar.gz
-tar -xzvf apache-tomcat-9.0.0.M21.tar.gz
-mv apache-tomcat-9.0.0.M21 /opt/tomcat
 
-# Tomcat User and Group Setup
-groupadd tomcat 
-useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
-chown -hR tomcat:tomcat /opt/tomcat
 
 
 
@@ -387,9 +332,6 @@ chown -hR tomcat:tomcat /opt/tomcat
 
 
 
-# Clone DDNS Repository
-cd /tmp
-git clone https://github.com/CanadianRepublican/DDNS_Server.git DDNS
 
 
 
@@ -503,6 +445,7 @@ firewall-cmd --zone=public --permanent --add-service=mysql
 firewall-cmd --zone=public --permanent --add-service=dns
 firewall-cmd --zone=public --permanent --add-port=8080/tcp
 firewall-cmd --zone=public --permanent --add-port=8080/udp
+
 firewall-cmd --reload
 firewall-cmd --zone=public --permanent --list-ports
 systemctl enable firewalld
