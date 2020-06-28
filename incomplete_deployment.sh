@@ -132,16 +132,6 @@ do
 done
 echo "$(date \"+%FT%T\") $STATUS" >> "${LOGFILE}"
 
-
-
-# If Slave
-   # Propt Master IP
-   # Prompt Master MySQL Server Password
-   # Prompt Slave ID
-
-
-
-
 # Prompt - Slave Server Prompts.
 STATUS="Prompts - Slave Server Inputs"
 echo "$(date \"+%FT%T\") $STATUS" >> "${LOGFILE}"
@@ -156,7 +146,7 @@ if [[ "$ddnsmaster" == "0" ]]; then
         read -p "Please enter DDNS Master Server IP Address?: " MASTERIP
         MASTERIP=${MASTERIP:-""}
         echo
-        read -p "DDNS Server Master IP: $MASTERIP [y/n]? " answer
+        read -p "DDNS Master Server IP: $MASTERIP [y/n]? " answer
 
         if [ "$answer" = '' ];
         then
@@ -179,10 +169,10 @@ if [[ "$ddnsmaster" == "0" ]]; then
     do
         finish="1"
         echo
-        read -p "Please enter DDNS Master Server IP Address?: " MYSQLPASSWORD
+        read -p "Please enter DDNS Master Server MySQL Password?: " MYSQLPASSWORD
         MYSQLPASSWORD=${MYSQLPASSWORD:-""}
         echo
-        read -p "DDNS Server Master MySQL Password: $MYSQLPASSWORD [y/n]? " answer
+        read -p "DDNS Master Server MySQL Password: $MYSQLPASSWORD [y/n]? " answer
 
         if [ "$answer" = '' ];
         then
@@ -208,7 +198,7 @@ if [[ "$ddnsmaster" == "0" ]]; then
         read -p "Please enter DDNS Slave ID Number that is being Setup?: " SLAVEID
         SLAVEID=${SLAVEID:-""}
         echo
-        read -p "DDNS Server Master MySQL Password: $SLAVEID [y/n]? " answer
+        read -p "DDNS Slave Server ID: $SLAVEID [y/n]? " answer
 
         if [ "$answer" = '' ];
         then
