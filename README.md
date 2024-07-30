@@ -176,7 +176,7 @@ That being said, time was spent documenting each command in the scripts. This sh
 
 
 ## Donations
-Many Bothans died getting this optimization and caching system to you, honor them by sending me some Crypto. ;)
+Many Bothans died getting this dynamic DNS server to you, honor them by sending me some Crypto. ;)
 
 ETH Mainnet: 0x1F4EABD7495E4B3D1D4F6dac07f953eCb28fD798   
 BNB Chain: 0x1F4EABD7495E4B3D1D4F6dac07f953eCb28fD798   
