@@ -1,6 +1,8 @@
 DNS Server
 ==========
 
+### By: Rahim Khoja (rahim@khoja.ca)
+
 Under Construction
 ------------------
 
