@@ -68,16 +68,6 @@ An open source DNS Server Solution that includes a Web Management System, a Rest
 
 
 
-
-### Support
------------
-
-Since I am extremely lazy I am not going to offer any support. Well maybe every once-n-a while. It really depends on my mood. 
-
-That being said, time was spent documenting each code section in the DNS Server. This should allow the scripts to be easily understood and modified if needed. 
-
-
-
 ### Update API
 ------------
 
@@ -178,21 +168,23 @@ http://bind-dlz.sourceforge.net/
 
 
 
-### Donations
--------------
+## Support
 
-Many Bothans died getting this DNS server to you, honor them by sending me some Bitcoin(BTC), or Ethereum(ETH).
+Since I am extremely lazy I am not going to offer any support. Well maybe every once-n-a while. It really depends on my mood. 
 
- * BTC: 1K4N5msYZHse6Hbxz4oWUjwqPf8wu6ducV
- * ETH: 0x76AB557F159a5048fA944566dbb18C834228d4e7
+That being said, time was spent documenting each command in the scripts. This should allow the scripts to be easily understood and modified if needed. 
 
 
+## Donations
+Many Bothans died getting this optimization and caching system to you, honor them by sending me some Crypto. ;)
+
+ETH Mainnet: 0x1F4EABD7495E4B3D1D4F6dac07f953eCb28fD798   
+BNB Chain: 0x1F4EABD7495E4B3D1D4F6dac07f953eCb28fD798   
 
 
-### License
------------
 
-Released under the GNU General Public License v3. (Not sure this is even valid)
+## License
+Released under the GNU General Public License v3. 
 
- * http://www.gnu.org/licenses/gpl-3.0.html
+http://www.gnu.org/licenses/gpl-3.0.html
 
